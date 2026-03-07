@@ -25,17 +25,17 @@ export default function Navbar() {
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 100,
         display: "flex", alignItems: "center", justifyContent: "space-between",
         padding: "0 5vw", height: "72px",
-        borderBottom: "1px solid transparent",
-        transition: "background .4s, border-color .4s",
+        borderBottom: "none",
+        transition: "background .4s",
         ...(scrolled
-          ? { background: "rgba(12,12,12,.85)", backdropFilter: "blur(20px)", borderColor: "var(--border)" }
+          ? { background: "rgba(12,12,12,.85)", backdropFilter: "blur(20px)" }
           : {}),
       }}
     >
       {/* Logo */}
       <div style={{ fontFamily: "var(--font-syne)", fontSize: 18, fontWeight: 800, letterSpacing: "-.02em", display: "flex", alignItems: "center", gap: 10 }}>
         <span className="pulse-dot" />
-        Alex<span style={{ color: "var(--gold)" }}>.</span>Mercer
+        Alawa<span style={{ color: "var(--gold)" }}>.</span>Augustine
       </div>
 
       {/* Links */}

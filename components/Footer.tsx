@@ -16,7 +16,7 @@ export default function Footer() {
       background: "var(--bg)",
     }}>
       <div style={{ fontSize: 11, letterSpacing: ".08em", color: "var(--muted)" }}>
-        © 2025 Alex Mercer. Crafted with care.
+        © 2025 Alawa Augustine. Crafted with care.
       </div>
       <div style={{ display: "flex", gap: 28 }}>
         {links.map(({ label, href }) => (

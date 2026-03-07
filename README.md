@@ -1,4 +1,4 @@
-# Alex Mercer — Portfolio
+# Alawa Augustine — Portfolio
 
 A full-stack developer portfolio built with **Next.js 14**, **TypeScript**, and **Tailwind CSS**.
 

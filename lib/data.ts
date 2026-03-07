@@ -102,7 +102,7 @@ export const PROJECTS = [
 ];
 
 export const CONTACT_CHANNELS = [
-  { label: "Email",    value: "alex@alexmercer.dev", href: "mailto:alex@alexmercer.dev" },
-  { label: "GitHub",   value: "github.com/alexmercer", href: "#" },
-  { label: "LinkedIn", value: "linkedin.com/in/alexmercer", href: "#" },
+  { label: "Email",    value: "alawa@alawaaugustine.dev", href: "mailto:alawa@alawaaugustine.dev" },
+  { label: "GitHub",   value: "github.com/alawaaugustine", href: "#" },
+  { label: "LinkedIn", value: "linkedin.com/in/alawaaugustine", href: "#" },
 ];
