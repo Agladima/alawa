@@ -111,9 +111,17 @@ export const PROJECTS = [
 export const CONTACT_CHANNELS = [
   {
     label: "Email",
-    value: "alawa@alawaaugustine.dev",
-    href: "mailto:alawa@alawaaugustine.dev",
+    value: "augustineagladima@gmail.com",
+    href: "mailto:augustineagladima@gmail.com",
   },
-  { label: "GitHub", value: "github.com/alawaaugustine", href: "#" },
-  { label: "LinkedIn", value: "linkedin.com/in/alawaaugustine", href: "#" },
+  {
+    label: "GitHub",
+    value: "github.com/Agladima",
+    href: "https://github.com/Agladima",
+  },
+  {
+    label: "LinkedIn",
+    value: "linkedin.com/in/Agladima",
+    href: "https://www.linkedin.com/in/agladima/",
+  },
 ];
