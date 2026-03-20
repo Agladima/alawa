@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Alawa Augustine — Full-Stack Developer",
+  title: " Augustine Alawa — Full-Stack Developer",
   description:
     "Full-stack developer crafting end-to-end web experiences with precision, performance, and purpose.",
   keywords: [
@@ -13,9 +13,9 @@ export const metadata: Metadata = {
     "Node.js",
     "portfolio",
   ],
-  authors: [{ name: "Alawa Augustine" }],
+  authors: [{ name: " Augustine Alawa" }],
   openGraph: {
-    title: "Alawa Augustine — Full-Stack Developer",
+    title: "  Augustine Alawa — Full-Stack Developer",
     description: "Building digital products that matter.",
     type: "website",
   },

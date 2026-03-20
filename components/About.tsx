@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Reveal from "@/components/RevealWrapper";
 import { ABOUT_DETAILS } from "@/lib/data";
 
@@ -68,19 +69,11 @@ export default function About() {
               }}
             />
 
-            {/* Placeholder */}
             <div
               style={{
                 width: "100%",
                 height: "100%",
                 background: "var(--surface)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontFamily: "var(--font-syne)",
-                fontSize: 80,
-                fontWeight: 800,
-                color: "var(--border)",
                 position: "relative",
               }}
             >
@@ -88,10 +81,17 @@ export default function About() {
                 style={{
                   position: "absolute",
                   inset: 20,
-                  border: "1px solid var(--border)",
+                  border: "1px solid rgba(0, 0, 0, 0.12)",
+                  zIndex: 1,
                 }}
               />
-              AM
+              <Image
+                src="/images/Pope.jpeg"
+                alt="Portrait of Augustine Alawa"
+                fill
+                sizes="(max-width: 900px) 90vw, 40vw"
+                style={{ objectFit: "cover" }}
+              />
             </div>
 
             {/* Badge */}
@@ -146,11 +146,11 @@ export default function About() {
             <>
               Hey — I&apos;m{" "}
               <strong style={{ color: "var(--text)", fontWeight: 400 }}>
-                Alawa Augustine
+                Augustine Alawa
               </strong>
-              , a full-stack developer based in San Francisco. I&apos;ve spent
-              the last seven years building web products that are as robust on
-              the inside as they are beautiful on the outside.
+              , a full-stack developer based in Calabar. Nigeria. I&apos;ve
+              spent the last four years building web products that are as robust
+              on the inside as they are beautiful on the outside.
             </>,
             <>
               My approach blends{" "}
@@ -168,8 +168,9 @@ export default function About() {
               <strong style={{ color: "var(--text)", fontWeight: 400 }}>
                 without cutting corners
               </strong>
-              . When I&apos;m not shipping code, you&apos;ll find me hiking,
-              reading about systems design, or tinkering with open-source tools.
+              . When I&apos;m not shipping code, you&apos;ll find me watching
+              documentaries, reading about systems design, or tinkering with
+              open-source tools.
             </>,
           ].map((text, i) => (
             <p

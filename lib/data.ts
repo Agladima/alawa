@@ -1,22 +1,29 @@
 export const STATS = [
-  { num: "7+",  label: "Years Experience" },
-  { num: "40+", label: "Projects Shipped" },
-  { num: "18",  label: "Happy Clients" },
+  { num: "4+", label: "Years Experience" },
+  { num: "35+", label: "Projects Shipped" },
+  { num: "15+", label: "Happy Clients" },
   { num: "99%", label: "Client Satisfaction" },
 ];
 
 export const ABOUT_DETAILS = [
-  { label: "Location",   value: "San Francisco, CA" },
+  { label: "Location", value: "Calabar, Nigeria" },
   { label: "Availability", value: "Open to roles" },
-  { label: "Focus",      value: "Full-Stack, React, Node" },
-  { label: "Education",  value: "B.S. Computer Science" },
+  { label: "Focus", value: "Full-Stack, React, Next.js, Node" },
+  { label: "Education", value: "B.Sc. Computer Science" },
 ];
 
 export const SKILLS = [
   {
     icon: "⚛",
     title: "Frontend",
-    tags: ["React", "Next.js", "TypeScript", "Tailwind", "Framer Motion", "Zustand"],
+    tags: [
+      "React",
+      "Next.js",
+      "Javascript",
+      "TypeScript",
+      "Tailwind",
+      "Framer Motion",
+    ],
   },
   {
     icon: "⚙",
@@ -37,25 +44,25 @@ export const SKILLS = [
 
 export const EXPERIENCE = [
   {
-    period: "2022 — Present",
-    company: "Luminary Labs",
-    badge: "Full-time",
-    role: "Senior Full-Stack Engineer",
-    desc: "Lead engineer on a 6-person product team building a B2B SaaS analytics platform. Architected the front-end component library used across 4 product lines and redesigned the data ingestion pipeline, reducing p95 latency by 60%.",
+    period: "2026 — Present",
+    company: "Asoro Automotive",
+    badge: "Internship",
+    role: "Frontend Developer",
+    desc: "Specializing in building high-performance, responsive, and user-centered web applications with a strong focus on clean design, accessibility, and maintainable code.",
     techs: ["React", "Node.js", "PostgreSQL", "AWS", "Docker"],
   },
   {
-    period: "2020 — 2022",
-    company: "Nexlayer Inc.",
+    period: "2025 — 2026",
+    company: "Benevox",
     badge: "Full-time",
-    role: "Full-Stack Developer",
-    desc: "Built and maintained consumer-facing features for a fintech platform serving 200k+ users. Shipped a real-time notification system and an OAuth2 authentication flow. Mentored two junior developers.",
+    role: "Frontend Developer",
+    desc: "Dedicated to helping startups across Africa grow, building scalable, user-focused digital products that support innovation, business expansion, and strong customer experiences.",
     techs: ["Next.js", "TypeScript", "GraphQL", "MongoDB", "Redis"],
   },
   {
-    period: "2018 — 2020",
-    company: "Studio Cipher",
-    badge: "Agency",
+    period: "2024 — 2025",
+    company: "TechyJaunt",
+    badge: "Internship",
     role: "Frontend Developer",
     desc: "Delivered pixel-perfect, performant marketing sites and web apps for clients across healthcare, e-commerce, and media. Worked directly with designers and stakeholders in a fast-paced agency environment.",
     techs: ["React", "JavaScript", "GSAP", "Webflow", "PHP"],
@@ -102,7 +109,11 @@ export const PROJECTS = [
 ];
 
 export const CONTACT_CHANNELS = [
-  { label: "Email",    value: "alawa@alawaaugustine.dev", href: "mailto:alawa@alawaaugustine.dev" },
-  { label: "GitHub",   value: "github.com/alawaaugustine", href: "#" },
+  {
+    label: "Email",
+    value: "alawa@alawaaugustine.dev",
+    href: "mailto:alawa@alawaaugustine.dev",
+  },
+  { label: "GitHub", value: "github.com/alawaaugustine", href: "#" },
   { label: "LinkedIn", value: "linkedin.com/in/alawaaugustine", href: "#" },
 ];
