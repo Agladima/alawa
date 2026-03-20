@@ -69,7 +69,7 @@ export default function Navbar() {
         {/* Links */}
         <ul
           className="nav-links-list"
-          style={{ display: "flex", gap: "2.5rem", listStyle: "none" }}
+          style={{ gap: "2.5rem", listStyle: "none" }}
         >
           {NAV_LINKS.map(({ label, href }) => (
             <li key={label}>

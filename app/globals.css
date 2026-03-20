@@ -158,6 +158,10 @@ a { color: inherit; text-decoration: none; }
   background: var(--gold) !important;
   color: var(--bg) !important;
 }
+.nav-links-list {
+  display: flex;
+  align-items: center;
+}
 .nav-toggle {
   display: none;
   width: 48px;
@@ -323,9 +327,6 @@ a { color: inherit; text-decoration: none; }
 @media (max-width: 900px) {
   body { cursor: auto; }
   .cursor, .cursor-ring { display: none; }
-  .nav-links-list { display: none; }
-  .nav-cta { display: none !important; }
-  .nav-toggle { display: inline-flex; }
   .about-grid, .skills-layout, .contact-inner { grid-template-columns: 1fr !important; gap: 48px !important; }
   .projects-grid { grid-template-columns: 1fr !important; }
   .proj-card-featured { grid-column: span 1 !important; }
@@ -334,8 +335,15 @@ a { color: inherit; text-decoration: none; }
   footer { flex-direction: column; gap: 20px; text-align: center; }
 }
 
-@media (min-width: 901px) {
+@media (max-width: 768px) {
+  .nav-links-list { display: none !important; }
+  .nav-cta { display: none !important; }
+  .nav-toggle { display: inline-flex !important; }
+  .nav-mobile-panel { display: block !important; }
+}
+
+@media (min-width: 769px) {
   .nav-mobile-panel {
-    display: none;
+    display: none !important;
   }
 }
