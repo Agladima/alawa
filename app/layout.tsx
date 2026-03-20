@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   title: " Augustine Alawa — Full-Stack Developer",
   description:
     "Full-stack developer crafting end-to-end web experiences with precision, performance, and purpose.",
+  icons: {
+    icon: "/images/favicon.ico",
+    shortcut: "/images/favicon.ico",
+    apple: "/images/favicon.ico",
+  },
   keywords: [
     "full-stack",
     "developer",

@@ -12,6 +12,7 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -19,83 +20,154 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  const closeMenu = () => setMenuOpen(false);
+
   return (
-    <nav
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 100,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        padding: "0 5vw",
-        height: "72px",
-        borderBottom: "none",
-        transition: "background .4s",
-        ...(scrolled
-          ? { background: "rgba(12,12,12,.85)", backdropFilter: "blur(20px)" }
-          : {}),
-      }}
-    >
-      {/* Logo */}
-      <div
+    <>
+      <nav
         style={{
-          fontFamily: "var(--font-syne)",
-          fontSize: 18,
-          fontWeight: 800,
-          letterSpacing: "-.02em",
           display: "flex",
           alignItems: "center",
-          gap: 10,
+          justifyContent: "space-between",
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          zIndex: 100,
+          padding: "0 5vw",
+          height: "72px",
+          borderBottom: "none",
+          transition: "background .4s",
+          ...(scrolled || menuOpen
+            ? { background: "rgba(12,12,12,.85)", backdropFilter: "blur(20px)" }
+            : {}),
         }}
       >
-        <span className="pulse-dot" />
-        Augustine<span style={{ color: "var(--gold)" }}>.</span>Alawa
-      </div>
+        {/* Logo */}
+        <div
+          style={{
+            fontFamily: "var(--font-syne)",
+            fontSize: 18,
+            fontWeight: 800,
+            letterSpacing: "-.02em",
+            display: "flex",
+            alignItems: "center",
+            gap: 10,
+          }}
+        >
+          <span className="pulse-dot" />
+          Augustine<span style={{ color: "var(--gold)" }}>.</span>Alawa
+        </div>
 
-      {/* Links */}
-      <ul
-        className="nav-links-list"
-        style={{ display: "flex", gap: "2.5rem", listStyle: "none" }}
-      >
-        {NAV_LINKS.map(({ label, href }) => (
-          <li key={label}>
-            <a
-              className="nav-link"
-              href={href}
+        {/* Links */}
+        <ul
+          className="nav-links-list"
+          style={{ display: "flex", gap: "2.5rem", listStyle: "none" }}
+        >
+          {NAV_LINKS.map(({ label, href }) => (
+            <li key={label}>
+              <a
+                className="nav-link"
+                href={href}
+                style={{
+                  fontSize: 11,
+                  letterSpacing: ".12em",
+                  textTransform: "uppercase",
+                  color: "var(--muted)",
+                  transition: "color .2s",
+                  position: "relative",
+                }}
+              >
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+
+        {/* CTA */}
+        <a
+          className="nav-cta"
+          href="#contact"
+          style={{
+            fontSize: 11,
+            letterSpacing: ".12em",
+            textTransform: "uppercase",
+            padding: "10px 22px",
+            border: "1px solid var(--gold)",
+            color: "var(--gold)",
+            transition: "background .3s, color .3s",
+          }}
+        >
+          Hire Me
+        </a>
+
+        <button
+          type="button"
+          className={`nav-toggle${menuOpen ? " nav-toggle-open" : ""}`}
+          aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((current) => !current)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+      </nav>
+
+      <div className={`nav-mobile-panel${menuOpen ? " nav-mobile-panel-open" : ""}`}>
+        <button
+          type="button"
+          className="nav-mobile-backdrop"
+          aria-label="Close navigation menu"
+          onClick={closeMenu}
+        />
+        <div className="nav-mobile-inner">
+          <div className="nav-mobile-header">
+            <div
               style={{
-                fontSize: 11,
-                letterSpacing: ".12em",
-                textTransform: "uppercase",
-                color: "var(--muted)",
-                transition: "color .2s",
-                position: "relative",
+                fontFamily: "var(--font-syne)",
+                fontSize: 16,
+                fontWeight: 800,
+                letterSpacing: "-.02em",
               }}
+            >
+              Menu
+            </div>
+            <button
+              type="button"
+              className="nav-mobile-close"
+              aria-label="Close navigation menu"
+              onClick={closeMenu}
+            >
+              Close
+            </button>
+          </div>
+          {NAV_LINKS.map(({ label, href }) => (
+            <a
+              key={label}
+              href={href}
+              className="nav-mobile-link"
+              onClick={closeMenu}
             >
               {label}
             </a>
-          </li>
-        ))}
-      </ul>
-
-      {/* CTA */}
-      <a
-        className="nav-cta"
-        href="#contact"
-        style={{
-          fontSize: 11,
-          letterSpacing: ".12em",
-          textTransform: "uppercase",
-          padding: "10px 22px",
-          border: "1px solid var(--gold)",
-          color: "var(--gold)",
-          transition: "background .3s, color .3s",
-        }}
-      >
-        Hire Me
-      </a>
-    </nav>
+          ))}
+          <a
+            href="#contact"
+            className="nav-mobile-cta"
+            onClick={closeMenu}
+          >
+            Hire Me
+          </a>
+        </div>
+      </div>
+    </>
   );
 }
