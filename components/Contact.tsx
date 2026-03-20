@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import Reveal from "@/components/RevealWrapper";
 import { CONTACT_CHANNELS } from "@/lib/data";
 
@@ -70,11 +70,62 @@ export default function Contact() {
 }
 
 function ContactForm() {
-  const [sent, setSent] = useState(false);
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
+    "idle"
+  );
+  const [feedback, setFeedback] = useState("");
 
-  const handleSubmit = () => {
-    setSent(true);
-    setTimeout(() => setSent(false), 3000);
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = event.target;
+    setForm((current) => ({ ...current, [name]: value }));
+  };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setStatus("loading");
+    setFeedback("");
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(form),
+      });
+
+      const data = (await response.json()) as { error?: string; message?: string };
+
+      if (!response.ok) {
+        throw new Error(data.error || "Something went wrong.");
+      }
+
+      setStatus("success");
+      setFeedback(data.message || "Message sent successfully.");
+      setForm({
+        firstName: "",
+        lastName: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+    } catch (error) {
+      setStatus("error");
+      setFeedback(
+        error instanceof Error
+          ? error.message
+          : "Unable to send your message right now."
+      );
+    }
   };
 
   const inputStyle: React.CSSProperties = {
@@ -85,47 +136,112 @@ function ContactForm() {
   };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+    <form
+      onSubmit={handleSubmit}
+      style={{ display: "flex", flexDirection: "column", gap: 24 }}
+    >
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
-        <Field label="First Name"><input className="form-input" type="text" placeholder="John" style={inputStyle} /></Field>
-        <Field label="Last Name"><input  className="form-input" type="text" placeholder="Doe"  style={inputStyle} /></Field>
+        <Field label="First Name">
+          <input
+            className="form-input"
+            type="text"
+            name="firstName"
+            value={form.firstName}
+            onChange={handleChange}
+            placeholder="John"
+            style={inputStyle}
+            required
+          />
+        </Field>
+        <Field label="Last Name">
+          <input
+            className="form-input"
+            type="text"
+            name="lastName"
+            value={form.lastName}
+            onChange={handleChange}
+            placeholder="Doe"
+            style={inputStyle}
+            required
+          />
+        </Field>
       </div>
       <Field label="Email">
-        <input className="form-input" type="email" placeholder="john@company.com" style={inputStyle} />
+        <input
+          className="form-input"
+          type="email"
+          name="email"
+          value={form.email}
+          onChange={handleChange}
+          placeholder="john@company.com"
+          style={inputStyle}
+          required
+        />
       </Field>
       <Field label="Subject">
-        <input className="form-input" type="text" placeholder="Project inquiry" style={inputStyle} />
+        <input
+          className="form-input"
+          type="text"
+          name="subject"
+          value={form.subject}
+          onChange={handleChange}
+          placeholder="Project inquiry"
+          style={inputStyle}
+          required
+        />
       </Field>
       <Field label="Message">
         <textarea
           className="form-textarea form-input"
+          name="message"
+          value={form.message}
+          onChange={handleChange}
           placeholder="Tell me about your project..."
           style={{ ...inputStyle, height: 120, resize: "none" }}
+          required
         />
       </Field>
 
       <button
-        className={`form-submit${sent ? " sent" : ""}`}
-        onClick={handleSubmit}
+        className={`form-submit${status === "success" ? " sent" : ""}`}
+        type="submit"
+        disabled={status === "loading"}
         style={{
           display: "inline-flex", alignItems: "center", gap: 12,
           padding: "16px 36px",
-          background: sent ? "#2d6a4f" : "var(--gold)",
-          color: sent ? "#b7e4c7" : "var(--bg)",
+          background: status === "success" ? "#2d6a4f" : "var(--gold)",
+          color: status === "success" ? "#b7e4c7" : "var(--bg)",
           fontFamily: "var(--font-syne)", fontSize: 12, fontWeight: 700,
           letterSpacing: ".1em", textTransform: "uppercase", border: "none",
           cursor: "none", transition: "background .3s, transform .3s",
           alignSelf: "flex-start",
+          opacity: status === "loading" ? 0.8 : 1,
         }}
       >
-        {sent ? "✓ Message Sent" : "Send Message"}
-        {!sent && (
+        {status === "loading"
+          ? "Sending..."
+          : status === "success"
+            ? "✓ Message Sent"
+            : "Send Message"}
+        {status !== "success" && status !== "loading" && (
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
             <path d="M2 7h10M7 2l5 5-5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         )}
       </button>
-    </div>
+
+      {feedback ? (
+        <p
+          style={{
+            color: status === "error" ? "#fca5a5" : "#b7e4c7",
+            fontSize: 12,
+            lineHeight: 1.7,
+          }}
+        >
+          {feedback}
+        </p>
+      ) : null}
+    </form>
   );
 }
 
