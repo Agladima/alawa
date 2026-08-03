@@ -14,7 +14,7 @@ export const ABOUT_DETAILS = [
 
 export const SKILLS = [
   {
-    icon: "âš›",
+    icon: "S",
     title: "Frontend",
     tags: [
       "React",
@@ -26,17 +26,17 @@ export const SKILLS = [
     ],
   },
   {
-    icon: "âš™",
+    icon: "B",
     title: "Backend",
     tags: ["Node.js", "Express", "Python", "FastAPI", "GraphQL", "REST"],
   },
   {
-    icon: "ðŸ—„",
+    icon: "D",
     title: "Data & Storage",
     tags: ["PostgreSQL", "MongoDB", "Redis", "Prisma", "Supabase", "S3"],
   },
   {
-    icon: "â˜",
+    icon: "C",
     title: "Cloud & DevOps",
     tags: ["AWS", "Docker", "Kubernetes", "CI/CD", "Terraform", "Vercel"],
   },
@@ -44,7 +44,7 @@ export const SKILLS = [
 
 export const EXPERIENCE = [
   {
-    period: "2026 â€” Present",
+    period: "2026 - Present",
     company: "Asoro Automotive",
     badge: "Internship",
     role: "Frontend Developer",
@@ -52,7 +52,7 @@ export const EXPERIENCE = [
     techs: ["React", "Node.js", "PostgreSQL", "AWS", "Docker"],
   },
   {
-    period: "2025 â€” 2026",
+    period: "2025 - 2026",
     company: "Benevox",
     badge: "Full-time",
     role: "Frontend Developer",
@@ -60,7 +60,7 @@ export const EXPERIENCE = [
     techs: ["Next.js", "TypeScript", "GraphQL", "MongoDB", "Redis"],
   },
   {
-    period: "2024 â€” 2025",
+    period: "2024 - 2025",
     company: "TechyJaunt",
     badge: "Internship",
     role: "Frontend Developer",
@@ -110,6 +110,7 @@ export const PROJECTS = [
     num: "02",
     icon: "TS",
     title: "Training Seminar Registration Site",
+    mobileTitle: "Training Seminar",
     desc: "A focused registration experience for a training seminar, designed to make sign-up feel clear and effortless.",
     stack: ["Next.js", "Vercel", "Registration"],
     href: "https://popesproject.vercel.app/",

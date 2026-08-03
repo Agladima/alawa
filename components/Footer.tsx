@@ -19,9 +19,7 @@ export default function Footer() {
         background: "var(--bg)",
       }}
     >
-      <div
-        style={{ fontSize: 11, letterSpacing: ".08em", color: "var(--muted)" }}
-      >
+      <div style={{ fontSize: 11, letterSpacing: ".08em", color: "var(--muted)" }}>
         © 2025 Augustine Alawa. Crafted with care.
       </div>
       <div style={{ display: "flex", gap: 28 }}>

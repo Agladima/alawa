@@ -1,8 +1,64 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Reveal from "@/components/RevealWrapper";
 import { ABOUT_DETAILS } from "@/lib/data";
 
+const ABOUT_PARAGRAPHS = [
+  <>
+    Hey - I&apos;m{" "}
+    <strong style={{ color: "var(--text)", fontWeight: 400 }}>
+      Augustine Alawa
+    </strong>
+    , a full-stack developer based in Calabar, Nigeria. I&apos;ve spent the
+    last four years building web products that are as robust on the inside as
+    they are beautiful on the outside.
+  </>,
+  <>
+    My approach blends{" "}
+    <strong style={{ color: "var(--text)", fontWeight: 400 }}>
+      engineering rigor with product instinct
+    </strong>
+    . I don&apos;t just write features - I think in user flows, performance
+    budgets, and maintainability. Whether I&apos;m shaping a React component or
+    architecting a Node microservice, I bring the same level of care to every
+    layer.
+  </>,
+  <>
+    I thrive in collaborative environments and have a deep appreciation for
+    teams that move fast{" "}
+    <strong style={{ color: "var(--text)", fontWeight: 400 }}>
+      without cutting corners
+    </strong>
+    . When I&apos;m not shipping code, you&apos;ll find me watching
+    documentaries, reading about systems design, or tinkering with open-source
+    tools.
+  </>,
+];
+
 export default function About() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 700px)");
+
+    const syncMobile = () => setIsMobile(mediaQuery.matches);
+    syncMobile();
+
+    mediaQuery.addEventListener("change", syncMobile);
+    return () => mediaQuery.removeEventListener("change", syncMobile);
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile) {
+      setExpanded(false);
+    }
+  }, [isMobile]);
+
+  const showToggle = isMobile;
+
   return (
     <section
       id="about"
@@ -12,7 +68,7 @@ export default function About() {
         position: "relative",
       }}
     >
-      <div className="section-label">01 — About</div>
+      <div className="section-label">01 - About</div>
 
       <div
         className="about-grid"
@@ -23,16 +79,15 @@ export default function About() {
           alignItems: "start",
         }}
       >
-        {/* Image */}
         <Reveal>
           <div
+            className="about-portrait"
             style={{
               position: "relative",
               aspectRatio: "3/4",
               overflow: "hidden",
             }}
           >
-            {/* Corner decorations */}
             <div
               style={{
                 position: "absolute",
@@ -58,7 +113,6 @@ export default function About() {
               }}
             />
 
-            {/* Gradient overlay */}
             <div
               style={{
                 position: "absolute",
@@ -86,7 +140,7 @@ export default function About() {
                 }}
               />
               <Image
-                src="/images/Pope.jpeg"
+                src="/images/agla.jpeg"
                 alt="Portrait of Augustine Alawa"
                 fill
                 sizes="(max-width: 900px) 90vw, 40vw"
@@ -94,7 +148,6 @@ export default function About() {
               />
             </div>
 
-            {/* Badge */}
             <div
               style={{
                 position: "absolute",
@@ -116,7 +169,6 @@ export default function About() {
           </div>
         </Reveal>
 
-        {/* Text */}
         <Reveal delay={120}>
           <div
             style={{
@@ -142,49 +194,68 @@ export default function About() {
             </em>
           </div>
 
-          {[
-            <>
-              Hey — I&apos;m{" "}
-              <strong style={{ color: "var(--text)", fontWeight: 400 }}>
-                Augustine Alawa
-              </strong>
-              , a full-stack developer based in Calabar. Nigeria. I&apos;ve
-              spent the last four years building web products that are as robust
-              on the inside as they are beautiful on the outside.
-            </>,
-            <>
-              My approach blends{" "}
-              <strong style={{ color: "var(--text)", fontWeight: 400 }}>
-                engineering rigor with product instinct
-              </strong>
-              . I don&apos;t just write features — I think in user flows,
-              performance budgets, and maintainability. Whether I&apos;m shaping
-              a React component or architecting a Node microservice, I bring the
-              same level of care to every layer.
-            </>,
-            <>
-              I thrive in collaborative environments and have a deep
-              appreciation for teams that move fast{" "}
-              <strong style={{ color: "var(--text)", fontWeight: 400 }}>
-                without cutting corners
-              </strong>
-              . When I&apos;m not shipping code, you&apos;ll find me watching
-              documentaries, reading about systems design, or tinkering with
-              open-source tools.
-            </>,
-          ].map((text, i) => (
-            <p
-              key={i}
+          <div
+            className={`about-copy${showToggle && !expanded ? " about-copy-collapsed" : ""}`}
+          >
+            {ABOUT_PARAGRAPHS.map((text, i) => (
+              <p
+                key={i}
+                style={{
+                  color: "var(--muted)",
+                  marginBottom: 20,
+                  fontSize: 13,
+                  lineHeight: 1.9,
+                }}
+              >
+                {text}
+              </p>
+            ))}
+
+            {showToggle ? <div className="about-copy-fade" /> : null}
+          </div>
+
+          {showToggle ? (
+            <button
+              type="button"
+              className="about-toggle"
+              onClick={() => setExpanded((current) => !current)}
+              aria-expanded={expanded}
               style={{
-                color: "var(--muted)",
-                marginBottom: 20,
-                fontSize: 13,
-                lineHeight: 1.9,
+                marginTop: 6,
+                display: "inline-flex",
+                alignItems: "center",
+                gap: 10,
+                border: "1px solid rgba(201,168,76,.35)",
+                background:
+                  "linear-gradient(135deg, rgba(201,168,76,.14), rgba(255,255,255,.03))",
+                color: "var(--text)",
+                padding: "12px 16px",
+                borderRadius: 999,
+                fontSize: 10,
+                letterSpacing: ".14em",
+                textTransform: "uppercase",
+                cursor: "pointer",
               }}
             >
-              {text}
-            </p>
-          ))}
+              <span
+                style={{
+                  display: "inline-flex",
+                  width: 22,
+                  height: 22,
+                  borderRadius: "50%",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  background: "var(--gold)",
+                  color: "var(--bg)",
+                  fontSize: 11,
+                  lineHeight: 1,
+                }}
+              >
+                {expanded ? "-" : "+"}
+              </span>
+              {expanded ? "Show less" : "Show more"}
+            </button>
+          ) : null}
 
           <div
             style={{

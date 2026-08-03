@@ -1,0 +1,15 @@
+
+> alex-mercer-portfolio@1.0.0 dev
+> next dev -p 3001
+
+  ▲ Next.js 14.2.5
+  - Local:        http://localhost:3001
+
+ ✓ Starting...
+ ✓ Ready in 4s
+ ○ Compiling / ...
+ ✓ Compiled / in 9.2s (518 modules)
+ GET / 200 in 9906ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 8.3s (521 modules)
+ GET /.well-known/appspecific/com.chrome.devtools.json 404 in 8627ms
