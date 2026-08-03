@@ -9,28 +9,56 @@ export default function Contact() {
     <section
       id="contact"
       style={{
-        padding: "120px 5vw", background: "var(--bg2)",
-        minHeight: "80vh", display: "flex", flexDirection: "column", justifyContent: "center",
+        padding: "120px 5vw",
+        background: "var(--bg2)",
+        minHeight: "80vh",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
       }}
     >
       <div
         className="contact-inner"
-        style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 100, alignItems: "start" }}
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: 100,
+          alignItems: "start",
+        }}
       >
-        {/* Left */}
         <div>
-          <div className="section-label">05 — Contact</div>
+          <div className="section-label">05 - Contact</div>
 
           <Reveal>
-            <div style={{ fontFamily: "var(--font-syne)", fontSize: "clamp(36px, 5vw, 64px)", fontWeight: 800, lineHeight: 1, letterSpacing: "-.03em" }}>
-              Let&apos;s build<br />something<br />
-              <em style={{ fontFamily: "var(--font-instrument)", fontStyle: "italic", fontWeight: 400, color: "var(--muted)" }}>great.</em>
+            <div
+              style={{
+                fontFamily: "var(--font-syne)",
+                fontSize: "clamp(36px, 5vw, 64px)",
+                fontWeight: 800,
+                lineHeight: 1,
+                letterSpacing: "-.03em",
+              }}
+            >
+              Let&apos;s build
+              <br />
+              something
+              <br />
+              <em
+                style={{
+                  fontFamily: "var(--font-instrument)",
+                  fontStyle: "italic",
+                  fontWeight: 400,
+                  color: "var(--muted)",
+                }}
+              >
+                great.
+              </em>
             </div>
           </Reveal>
 
           <Reveal delay={80}>
             <p style={{ color: "var(--muted)", fontSize: 13, lineHeight: 1.9, marginTop: 28 }}>
-              Whether you have a project in mind, a full-time role, or just want to say hello — my inbox is always open.
+              Whether you have a project in mind, a full-time role, or just want to say hello - my inbox is always open.
             </p>
           </Reveal>
 
@@ -42,8 +70,11 @@ export default function Contact() {
                   href={href}
                   className="contact-channel"
                   style={{
-                    display: "flex", alignItems: "center", justifyContent: "space-between",
-                    padding: "20px 0", borderBottom: "1px solid var(--border)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    padding: "20px 0",
+                    borderBottom: "1px solid var(--border)",
                     transition: "padding-left .3s",
                   }}
                 >
@@ -60,7 +91,6 @@ export default function Contact() {
           </Reveal>
         </div>
 
-        {/* Right: Form */}
         <Reveal delay={200}>
           <ContactForm />
         </Reveal>
@@ -77,9 +107,7 @@ function ContactForm() {
     subject: "",
     message: "",
   });
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
-    "idle"
-  );
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [feedback, setFeedback] = useState("");
 
   const handleChange = (
@@ -129,18 +157,20 @@ function ContactForm() {
   };
 
   const inputStyle: React.CSSProperties = {
-    background: "var(--surface)", border: "1px solid var(--border)",
-    color: "var(--text)", fontFamily: "var(--font-dm-mono)", fontSize: 13,
-    padding: "14px 16px", outline: "none", width: "100%",
+    background: "var(--surface)",
+    border: "1px solid var(--border)",
+    color: "var(--text)",
+    fontFamily: "var(--font-dm-mono)",
+    fontSize: 13,
+    padding: "14px 16px",
+    outline: "none",
+    width: "100%",
     transition: "border-color .3s",
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      style={{ display: "flex", flexDirection: "column", gap: 24 }}
-    >
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+    <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 24 }}>
+      <div className="contact-name-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
         <Field label="First Name">
           <input
             className="form-input"
@@ -207,13 +237,20 @@ function ContactForm() {
         type="submit"
         disabled={status === "loading"}
         style={{
-          display: "inline-flex", alignItems: "center", gap: 12,
+          display: "inline-flex",
+          alignItems: "center",
+          gap: 12,
           padding: "16px 36px",
           background: status === "success" ? "#2d6a4f" : "var(--gold)",
           color: status === "success" ? "#b7e4c7" : "var(--bg)",
-          fontFamily: "var(--font-syne)", fontSize: 12, fontWeight: 700,
-          letterSpacing: ".1em", textTransform: "uppercase", border: "none",
-          cursor: "none", transition: "background .3s, transform .3s",
+          fontFamily: "var(--font-syne)",
+          fontSize: 12,
+          fontWeight: 700,
+          letterSpacing: ".1em",
+          textTransform: "uppercase",
+          border: "none",
+          cursor: "none",
+          transition: "background .3s, transform .3s",
           alignSelf: "flex-start",
           opacity: status === "loading" ? 0.8 : 1,
         }}

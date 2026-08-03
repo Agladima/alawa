@@ -16,7 +16,6 @@ export default function Hero() {
         overflow: "hidden",
       }}
     >
-      {/* Grid background */}
       <div
         style={{
           position: "absolute",
@@ -33,7 +32,6 @@ export default function Hero() {
         }}
       />
 
-      {/* Year tag */}
       <div
         className="anim-fade-up-year"
         style={{
@@ -50,7 +48,6 @@ export default function Hero() {
         © 2026
       </div>
 
-      {/* Scroll line */}
       <div
         className="anim-scroll-line"
         style={{
@@ -63,9 +60,10 @@ export default function Hero() {
         }}
       />
 
-      {/* Main content */}
-      <div style={{ position: "relative", zIndex: 1, maxWidth: 900 }}>
-        {/* Tag */}
+      <div
+        className="hero-content"
+        style={{ position: "relative", zIndex: 1, maxWidth: 900 }}
+      >
         <div
           className="anim-fade-up-1"
           style={{
@@ -90,7 +88,6 @@ export default function Hero() {
           Full-Stack Developer
         </div>
 
-        {/* H1 */}
         <h1
           className="anim-fade-up-2"
           style={{
@@ -119,7 +116,6 @@ export default function Hero() {
           that matter.
         </h1>
 
-        {/* Subheading */}
         <p
           className="anim-fade-up-3"
           style={{
@@ -130,17 +126,17 @@ export default function Hero() {
             color: "var(--muted)",
           }}
         >
-          I craft end-to-end web experiences — from elegant UIs to resilient
-          backends — with precision, performance, and purpose.
+          I craft end-to-end web experiences - from elegant UIs to resilient
+          backends - with precision, performance, and purpose.
         </p>
 
-        {/* Actions */}
         <div
-          className="anim-fade-up-4"
+          className="hero-actions anim-fade-up-4"
           style={{
             display: "flex",
             gap: 20,
             alignItems: "center",
+            flexWrap: "wrap",
             marginTop: 48,
           }}
         >
@@ -183,7 +179,6 @@ export default function Hero() {
           </a>
         </div>
 
-        {/* Stats */}
         <div
           className="hero-stats anim-fade-up-5"
           style={{
