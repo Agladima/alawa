@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
 type ContactPayload = {
   firstName?: string;
@@ -19,29 +19,7 @@ const MAX_LENGTHS = {
 
 const CONTACT_TO_EMAIL =
   process.env.CONTACT_TO_EMAIL || "augustineagladima@gmail.com";
-
-function getTransporter() {
-  const host = process.env.SMTP_HOST;
-  const port = Number(process.env.SMTP_PORT || "587");
-  const user = process.env.SMTP_USER;
-  const pass = process.env.SMTP_PASS;
-
-  if (!host || !user || !pass) {
-    throw new Error(
-      "Email service is not configured. Add SMTP_HOST, SMTP_PORT, SMTP_USER, and SMTP_PASS."
-    );
-  }
-
-  return nodemailer.createTransport({
-    host,
-    port,
-    secure: port === 465,
-    auth: {
-      user,
-      pass,
-    },
-  });
-}
+const RESEND_FROM_EMAIL = process.env.RESEND_FROM_EMAIL;
 
 function escapeHtml(value: string) {
   return value.replace(
@@ -110,16 +88,23 @@ export async function POST(request: Request) {
       );
     }
 
-    const transporter = getTransporter();
-    const fromEmail = process.env.CONTACT_FROM_EMAIL || process.env.SMTP_USER;
+    const apiKey = process.env.RESEND_API_KEY;
+    if (!apiKey || !RESEND_FROM_EMAIL) {
+      return NextResponse.json(
+        { error: "Email service is not configured. Please try again later." },
+        { status: 503 }
+      );
+    }
+
+    const resend = new Resend(apiKey);
     const safeFirstName = escapeHtml(firstName);
     const safeLastName = escapeHtml(lastName);
     const safeEmail = escapeHtml(email);
     const safeSubject = escapeHtml(subject);
     const safeMessage = escapeHtml(message).replace(/\n/g, "<br />");
 
-    await transporter.sendMail({
-      from: `"Portfolio Contact" <${fromEmail}>`,
+    const { error: ownerError } = await resend.emails.send({
+      from: RESEND_FROM_EMAIL,
       to: CONTACT_TO_EMAIL,
       replyTo: email,
       subject: `Portfolio inquiry: ${subject}`,
@@ -141,34 +126,12 @@ export async function POST(request: Request) {
         </div>
       `,
     });
-
-    try {
-      await transporter.sendMail({
-        from: `"Augustine Alawa" <${fromEmail}>`,
-        to: email,
-        replyTo: CONTACT_TO_EMAIL,
-        subject: "I received your message",
-        text: [
-          `Hi ${firstName},`,
-          "",
-          "Thanks for reaching out. I have received your message and will get back to you soon.",
-          "",
-          `Email received from: ${email}`,
-          "",
-          "Best,",
-          "Augustine Alawa",
-        ].join("\n"),
-        html: `
-          <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #111827;">
-            <p>Hi ${safeFirstName},</p>
-            <p>Thanks for reaching out. I have received your message and will get back to you soon.</p>
-            <p><strong>Email received from:</strong> ${safeEmail}</p>
-            <p>Best,<br />Augustine Alawa</p>
-          </div>
-        `,
-      });
-    } catch (error) {
-      console.error("Contact acknowledgement delivery failed:", error);
+    if (ownerError) {
+      console.error("Contact owner delivery failed:", ownerError);
+      return NextResponse.json(
+        { error: "Email delivery is temporarily unavailable. Please try again later." },
+        { status: 502 }
+      );
     }
 
     return NextResponse.json({
