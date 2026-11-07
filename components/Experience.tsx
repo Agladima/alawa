@@ -8,6 +8,7 @@ export default function Experience() {
 
       <Reveal>
         <div
+          className="heading-text"
           style={{
             fontFamily: "var(--font-syne)",
             fontSize: "clamp(32px, 4vw, 56px)",
@@ -55,7 +56,7 @@ export default function Experience() {
                   bottom: 0,
                   width: 0,
                   background:
-                    "linear-gradient(to right, rgba(201,168,76,.05), transparent)",
+                    "linear-gradient(to right, rgba(255,255,255,.05), transparent)",
                   transition: "width .4s",
                 }}
                 className="exp-item-hoverbg"
@@ -123,7 +124,7 @@ export default function Experience() {
                         fontSize: 10,
                         letterSpacing: ".08em",
                         color: "var(--gold)",
-                        border: "1px solid rgba(201,168,76,.3)",
+                        border: "1px solid rgba(255,255,255,.3)",
                         padding: "3px 10px",
                       }}
                     >

@@ -1,5 +1,3 @@
-"use client";
-
 import { STATS } from "@/lib/data";
 
 export default function Hero() {
@@ -11,27 +9,11 @@ export default function Hero() {
         display: "flex",
         flexDirection: "column",
         justifyContent: "flex-end",
-        padding: "0 5vw 8vh",
+        padding: "96px 5vw 8vh",
         position: "relative",
         overflow: "hidden",
       }}
     >
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          zIndex: 0,
-          backgroundImage:
-            "linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px)",
-          backgroundSize: "80px 80px",
-          maskImage:
-            "radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)",
-          WebkitMaskImage:
-            "radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%)",
-          opacity: 0.35,
-        }}
-      />
-
       <div
         className="anim-fade-up-year"
         style={{
@@ -60,6 +42,25 @@ export default function Hero() {
         }}
       />
 
+      <div className="hero-visual" aria-hidden="true">
+        <div className="code-window">
+          <div className="code-window-bar">
+            <span />
+            <span />
+            <span />
+            <small>portfolio.tsx</small>
+          </div>
+          <div className="code-lines">
+            <div><i>01</i><b>const</b> developer = <em>&quot;Augustine&quot;</em>;</div>
+            <div><i>02</i><b>function</b> <strong>build</strong>(ideas) &#123;</div>
+            <div><i>03</i>&nbsp;&nbsp;<b>return</b> <span className="code-accent">products</span>;</div>
+            <div><i>04</i>&#125;</div>
+            <div><i>05</i><span className="code-prompt">▌</span></div>
+          </div>
+        </div>
+        <div className="hero-visual-label">01 / Full-stack developer</div>
+      </div>
+
       <div
         className="hero-content"
         style={{ position: "relative", zIndex: 1, maxWidth: 900 }}
@@ -82,14 +83,14 @@ export default function Hero() {
               display: "block",
               width: 40,
               height: 1,
-              background: "var(--gold)",
+              background: "var(--gold2)",
             }}
           />
           Full-Stack Developer
         </div>
 
         <h1
-          className="anim-fade-up-2"
+          className="heading-text anim-fade-up-2"
           style={{
             fontFamily: "var(--font-syne)",
             fontSize: "clamp(52px, 8vw, 110px)",
@@ -148,7 +149,7 @@ export default function Hero() {
               alignItems: "center",
               gap: 10,
               padding: "14px 32px",
-              background: "var(--gold)",
+              background: "var(--gold2)",
               color: "var(--bg)",
               fontFamily: "var(--font-syne)",
               fontSize: 12,

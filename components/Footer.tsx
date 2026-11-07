@@ -11,7 +11,7 @@ export default function Footer() {
   return (
     <footer
       style={{
-        padding: "40px 5vw",
+        padding: "24px 5vw",
         borderTop: "1px solid var(--border)",
         display: "flex",
         alignItems: "center",
@@ -20,7 +20,7 @@ export default function Footer() {
       }}
     >
       <div style={{ fontSize: 11, letterSpacing: ".08em", color: "var(--muted)" }}>
-        © 2025 Augustine Alawa. Crafted with care.
+        © 2026 Augustine Alawa.
       </div>
       <div style={{ display: "flex", gap: 28 }}>
         {links.map(({ label, href }) => {

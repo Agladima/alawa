@@ -43,10 +43,12 @@ export default function Navbar() {
           zIndex: 100,
           padding: "0 5vw",
           height: "72px",
-          borderBottom: "none",
+          background: "rgba(255,255,255,.86)",
+          backdropFilter: "blur(20px)",
+          borderBottom: "1px solid var(--border)",
           transition: "background .4s",
           ...(scrolled || menuOpen
-            ? { background: "rgba(12,12,12,.85)", backdropFilter: "blur(20px)" }
+            ? { background: "rgba(255,255,255,.94)" }
             : {}),
         }}
       >
@@ -59,10 +61,9 @@ export default function Navbar() {
             letterSpacing: "-.02em",
             display: "flex",
             alignItems: "center",
-            gap: 10,
+            gap: 0,
           }}
         >
-          <span className="pulse-dot" />
           Augustine<span style={{ color: "var(--gold)" }}>.</span>Alawa
         </div>
 
@@ -100,8 +101,8 @@ export default function Navbar() {
             letterSpacing: ".12em",
             textTransform: "uppercase",
             padding: "10px 22px",
-            border: "1px solid var(--gold)",
-            color: "var(--gold)",
+            border: "1px solid var(--muted)",
+            color: "var(--text)",
             transition: "background .3s, color .3s",
           }}
         >

@@ -70,6 +70,7 @@ export default function Projects() {
     <>
       <section id="projects" style={{ padding: "120px 5vw", background: "var(--bg)" }}>
         <div
+          className="heading-text"
           style={{
             display: "flex",
             justifyContent: "space-between",
@@ -260,7 +261,7 @@ export default function Projects() {
                       alignItems: "center",
                       padding: "20px",
                       border: "1px solid var(--border)",
-                      background: "rgba(17,17,17,.74)",
+                      background: "rgba(242,242,239,.86)",
                       transition: "transform .2s, border-color .2s, background .2s",
                     }}
                   >
@@ -276,7 +277,7 @@ export default function Projects() {
                         fontSize: 15,
                         fontWeight: 800,
                         color: "var(--gold)",
-                        background: "rgba(201,168,76,.06)",
+                        background: "rgba(255,255,255,.06)",
                       }}
                     >
                       {item.code}
@@ -355,7 +356,7 @@ export default function Projects() {
                     alignItems: "center",
                     padding: "20px",
                     border: "1px solid var(--border)",
-                    background: "rgba(17,17,17,.74)",
+                    background: "rgba(242,242,239,.86)",
                   }}
                 >
                   <div
@@ -370,7 +371,7 @@ export default function Projects() {
                       fontSize: 18,
                       fontWeight: 800,
                       color: "var(--gold)",
-                      background: "rgba(201,168,76,.06)",
+                      background: "rgba(255,255,255,.06)",
                     }}
                   >
                     {activeProject.icon}
@@ -527,7 +528,7 @@ function ProjectCard({
             fontSize: 24,
             fontWeight: 800,
             color: "var(--gold)",
-            background: "rgba(201,168,76,.06)",
+            background: "rgba(255,255,255,.06)",
           }}
         >
           {project.icon}
