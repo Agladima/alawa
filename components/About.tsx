@@ -89,6 +89,7 @@ export default function About() {
             }}
           >
             <div
+              className="heading-text"
               style={{
                 position: "absolute",
                 top: -12,
@@ -140,7 +141,7 @@ export default function About() {
                 }}
               />
               <Image
-                src="/images/agla.jpeg"
+                src="/images/newabout.jpeg"
                 alt="Portrait of Augustine Alawa"
                 fill
                 sizes="(max-width: 900px) 90vw, 40vw"
@@ -154,7 +155,7 @@ export default function About() {
                 bottom: 24,
                 left: 24,
                 zIndex: 2,
-                background: "var(--gold)",
+                background: "var(--gold2)",
                 color: "var(--bg)",
                 fontFamily: "var(--font-syne)",
                 fontSize: 11,
@@ -205,6 +206,7 @@ export default function About() {
                   marginBottom: 20,
                   fontSize: 13,
                   lineHeight: 1.9,
+                  fontFamily: "var(--font-dm-mono)",
                 }}
               >
                 {text}
@@ -225,9 +227,9 @@ export default function About() {
                 display: "inline-flex",
                 alignItems: "center",
                 gap: 10,
-                border: "1px solid rgba(201,168,76,.35)",
+                border: "1px solid rgba(255,255,255,.35)",
                 background:
-                  "linear-gradient(135deg, rgba(201,168,76,.14), rgba(255,255,255,.03))",
+                  "linear-gradient(135deg, rgba(255,255,255,.14), rgba(255,255,255,.03))",
                 color: "var(--text)",
                 padding: "12px 16px",
                 borderRadius: 999,
@@ -245,7 +247,7 @@ export default function About() {
                   borderRadius: "50%",
                   alignItems: "center",
                   justifyContent: "center",
-                  background: "var(--gold)",
+                  background: "var(--gold2)",
                   color: "var(--bg)",
                   fontSize: 11,
                   lineHeight: 1,
@@ -277,11 +279,18 @@ export default function About() {
                     textTransform: "uppercase",
                     color: "var(--muted)",
                     marginBottom: 6,
+                    fontFamily: "var(--font-dm-mono)",
                   }}
                 >
                   {label}
                 </div>
-                <div style={{ fontSize: 13, color: "var(--text)" }}>
+                <div
+                  style={{
+                    fontSize: 13,
+                    color: "var(--text)",
+                    fontFamily: "var(--font-dm-mono)",
+                  }}
+                >
                   {value}
                 </div>
               </div>

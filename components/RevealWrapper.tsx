@@ -18,7 +18,7 @@ export default function Reveal({ children, delay = 0, className = "", style }: P
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          setTimeout(() => el.classList.add("visible"), delay);
+          el.classList.add("visible");
           observer.unobserve(el);
         }
       },
@@ -29,7 +29,11 @@ export default function Reveal({ children, delay = 0, className = "", style }: P
   }, [delay]);
 
   return (
-    <div ref={ref} className={`reveal ${className}`} style={style}>
+    <div
+      ref={ref}
+      className={`reveal ${className}`}
+      style={{ ...style, transitionDelay: `${delay}ms` }}
+    >
       {children}
     </div>
   );

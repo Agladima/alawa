@@ -77,7 +77,7 @@ export const PROJECTS = [
     title: "National Conference",
     desc: "A calm, unified showcase for the conference websites I helped bring to life.",
     stack: ["Next.js", "TypeScript", "Vercel"],
-    href: "#",
+    href: "https://est-alpha.vercel.app/",
     modalTitle: "Conference Highlights",
     modalIntro:
       "A set of three conference websites, each with its own identity, flow, and live deployment.",

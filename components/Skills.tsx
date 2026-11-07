@@ -12,6 +12,7 @@ export default function Skills() {
       >
         <Reveal>
           <div
+            className="heading-text"
             style={{
               fontFamily: "var(--font-syne)",
               fontSize: "clamp(32px, 4vw, 56px)",
@@ -80,7 +81,7 @@ function SkillCard({ icon, title, tags }: { icon: string; title: string; tags: s
           left: 0,
           height: 2,
           width: 0,
-          background: "var(--gold)",
+          background: "var(--gold2)",
           transition: "width .4s",
         }}
         className="skill-card-bar"

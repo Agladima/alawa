@@ -31,6 +31,7 @@ export default function Contact() {
 
           <Reveal>
             <div
+              className="heading-text"
               style={{
                 fontFamily: "var(--font-syne)",
                 fontSize: "clamp(36px, 5vw, 64px)",
@@ -63,28 +64,35 @@ export default function Contact() {
           </Reveal>
 
           <Reveal delay={140}>
-            <div style={{ marginTop: 52, display: "flex", flexDirection: "column" }}>
-              {CONTACT_CHANNELS.map(({ label, value, href }) => (
+            <div
+              style={{
+                marginTop: 52,
+                display: "flex",
+                alignItems: "center",
+                gap: 12,
+              }}
+            >
+              {CONTACT_CHANNELS.map(({ label, href }) => (
                 <a
                   key={label}
                   href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Open ${label}`}
+                  title={`Open ${label}`}
                   className="contact-channel"
                   style={{
-                    display: "flex",
+                    display: "inline-flex",
                     alignItems: "center",
-                    justifyContent: "space-between",
-                    padding: "20px 0",
-                    borderBottom: "1px solid var(--border)",
-                    transition: "padding-left .3s",
+                    justifyContent: "center",
+                    width: 48,
+                    height: 48,
+                    border: "1px solid var(--border)",
+                    color: "var(--muted)",
+                    transition: "color .2s, border-color .2s, transform .3s",
                   }}
                 >
-                  <div>
-                    <div style={{ fontSize: 10, letterSpacing: ".15em", textTransform: "uppercase", color: "var(--muted)", marginBottom: 4 }}>{label}</div>
-                    <div className="channel-value" style={{ fontFamily: "var(--font-syne)", fontSize: 15, fontWeight: 600, transition: "color .2s" }}>{value}</div>
-                  </div>
-                  <svg className="channel-icon" width="18" height="18" viewBox="0 0 18 18" fill="none" style={{ color: "var(--muted)", transition: "color .2s, transform .3s" }}>
-                    <path d="M3 9h12M9 3l6 6-6 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                  <ContactIcon label={label} />
                 </a>
               ))}
             </div>
@@ -96,6 +104,31 @@ export default function Contact() {
         </Reveal>
       </div>
     </section>
+  );
+}
+
+function ContactIcon({ label }: { label: string }) {
+  if (label === "Email") {
+    return (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+        <rect x="3" y="5" width="18" height="14" rx="1" stroke="currentColor" strokeWidth="1.5" />
+        <path d="m4 7 8 6 8-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+
+  if (label === "GitHub") {
+    return (
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 2.5a9.5 9.5 0 0 0-3 18.51c.48.09.65-.21.65-.46v-1.67c-2.65.58-3.21-1.28-3.21-1.28-.44-1.13-1.08-1.43-1.08-1.43-.87-.6.07-.59.07-.59.96.07 1.47.99 1.47.99.86 1.47 2.26 1.05 2.81.8.09-.62.34-1.05.61-1.29-2.12-.24-4.35-1.06-4.35-4.71 0-1.04.37-1.89.98-2.56-.1-.24-.43-1.21.09-2.52 0 0 .8-.26 2.62.98a9.1 9.1 0 0 1 4.77 0c1.82-1.24 2.62-.98 2.62-.98.52 1.31.19 2.28.09 2.52.61.67.98 1.52.98 2.56 0 3.66-2.23 4.47-4.36 4.7.35.31.65.91.65 1.84v2.74c0 .25.17.55.66.46A9.5 9.5 0 0 0 12 2.5Z" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M5.2 3.5A1.7 1.7 0 1 1 5.2 6.9a1.7 1.7 0 0 1 0-3.4ZM3.7 8.3h3v10.2h-3V8.3Zm4.8 0h2.9v1.4h.04c.4-.76 1.38-1.55 2.84-1.55 3.03 0 3.59 1.99 3.59 4.57v5.77h-3v-5.12c0-1.22-.02-2.79-1.7-2.79-1.7 0-1.96 1.32-1.96 2.7v5.21h-3V8.3Z" />
+    </svg>
   );
 }
 
@@ -123,13 +156,17 @@ function ContactForm() {
     setFeedback("");
 
     try {
+      const controller = new AbortController();
+      const timeout = window.setTimeout(() => controller.abort(), 15000);
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(form),
+        signal: controller.signal,
       });
+      window.clearTimeout(timeout);
 
       const data = (await response.json()) as { error?: string; message?: string };
 
@@ -149,7 +186,9 @@ function ContactForm() {
     } catch (error) {
       setStatus("error");
       setFeedback(
-        error instanceof Error
+        error instanceof DOMException && error.name === "AbortError"
+          ? "The request timed out. Please try again."
+          : error instanceof Error
           ? error.message
           : "Unable to send your message right now."
       );
@@ -181,6 +220,7 @@ function ContactForm() {
             placeholder="John"
             style={inputStyle}
             required
+            maxLength={80}
           />
         </Field>
         <Field label="Last Name">
@@ -193,6 +233,7 @@ function ContactForm() {
             placeholder="Doe"
             style={inputStyle}
             required
+            maxLength={80}
           />
         </Field>
       </div>
@@ -206,6 +247,7 @@ function ContactForm() {
           placeholder="john@company.com"
           style={inputStyle}
           required
+          maxLength={254}
         />
       </Field>
       <Field label="Subject">
@@ -218,6 +260,7 @@ function ContactForm() {
           placeholder="Project inquiry"
           style={inputStyle}
           required
+          maxLength={160}
         />
       </Field>
       <Field label="Message">
@@ -229,6 +272,7 @@ function ContactForm() {
           placeholder="Tell me about your project..."
           style={{ ...inputStyle, height: 120, resize: "none" }}
           required
+          maxLength={5000}
         />
       </Field>
 
@@ -241,15 +285,15 @@ function ContactForm() {
           alignItems: "center",
           gap: 12,
           padding: "16px 36px",
-          background: status === "success" ? "#2d6a4f" : "var(--gold)",
-          color: status === "success" ? "#b7e4c7" : "var(--bg)",
+          background: status === "success" ? "var(--surface)" : "var(--gold2)",
+          color: "var(--bg)",
           fontFamily: "var(--font-syne)",
           fontSize: 12,
           fontWeight: 700,
           letterSpacing: ".1em",
           textTransform: "uppercase",
           border: "none",
-          cursor: "none",
+          cursor: "pointer",
           transition: "background .3s, transform .3s",
           alignSelf: "flex-start",
           opacity: status === "loading" ? 0.8 : 1,
@@ -269,8 +313,10 @@ function ContactForm() {
 
       {feedback ? (
         <p
+          role="status"
+          aria-live="polite"
           style={{
-            color: status === "error" ? "#fca5a5" : "#b7e4c7",
+            color: status === "error" ? "var(--text)" : "var(--muted)",
             fontSize: 12,
             lineHeight: 1.7,
           }}
